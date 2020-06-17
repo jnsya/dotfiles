@@ -1,0 +1,21 @@
+[push]
+	default = current
+
+[user]
+	email = jonosenior@gmail.com
+	name = Jonathan Senior
+[push]
+	default = current
+[core]
+	editor = atom --wait
+	pager = less -F -X
+[alias]
+	st = status
+	br = branch
+	ci = commit
+	co = checkout
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	dump = cat-file -p
+[gui]
+	editor = atom
+
