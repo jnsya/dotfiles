@@ -24,6 +24,9 @@ Plugin 'junegunn/fzf.vim'
 " Git wrapper
 Plugin 'tpope/vim-fugitive'
 
+" Comment stuff out with gcc
+Plugin 'tpope/vim-commentary'
+
 call vundle#end()            
 
 filetype plugin on " Without this, Vundle weirdly would not load plugins: https://github.com/VundleVim/Vundle.vim/issues/679
