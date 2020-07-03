@@ -109,6 +109,7 @@ alias gr='git reset '
 
 alias be='bundle exec '
 
+alias t='todo.sh'
 
 . $(brew --prefix asdf)/asdf.sh
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -118,3 +119,14 @@ export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
 export PATH=~/.emacs.d/bin:$PATH
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+

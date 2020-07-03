@@ -7,7 +7,7 @@
 [push]
 	default = current
 [core]
-	editor = atom --wait
+	editor = vim
 	pager = less -F -X
 [alias]
 	st = status
@@ -19,3 +19,5 @@
 [gui]
 	editor = atom
 
+[rerere]
+	enabled = 1
