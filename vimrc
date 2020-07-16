@@ -62,6 +62,10 @@ inoremap <right> <nop>
 nnoremap j gj
 nnoremap k gk
 
+" No beeping!
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
 set background=dark    		             " Setting dark mode
 autocmd vimenter * colorscheme gruvbox " See https://github.com/morhetz/gruvbox/wiki/Installation
 
@@ -127,8 +131,8 @@ vnoremap // y/<C-R>"<CR>"
 set hlsearch
 set incsearch
 
-" <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+" Redraws the screen and removes any search highlighting
+nnoremap <silent> <C-c> :nohl<CR><C-c>
 
 " Toggle tree in directory of current buffer
 map <C-o> :NERDTreeToggle %<CR>
@@ -147,8 +151,8 @@ nnoremap <C-f> :Rg<Cr>
 " }}}
 
 " Folding ---------------------------------------------------------------- {{{
-set foldmethod=syntax
-set foldlevelstart=1
+" set foldmethod=syntax
+" set foldlevelstart=1
 
 " }}}
 
@@ -176,5 +180,13 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_global_extensions = ['coc-solargraph']
+
+" }}}
+
+" split navigation ---------------------------------------------------------------- {{{
+nmap <C-h> <C-w>h
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
 
 " }}}
