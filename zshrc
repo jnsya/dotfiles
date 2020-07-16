@@ -10,6 +10,9 @@ export ZSH="/Users/jnsya/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
 
+# Turn off all beeps
+unsetopt BEEP
+
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
@@ -109,7 +112,7 @@ alias gr='git reset '
 
 alias be='bundle exec '
 
-alias t='todo.sh'
+alias ovm='overmind s -f Procfile.dev'
 
 . $(brew --prefix asdf)/asdf.sh
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
