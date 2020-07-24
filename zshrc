@@ -112,7 +112,14 @@ alias gr='git reset '
 
 alias be='bundle exec '
 
+# Shortcuts for common work tasks
 alias ovm='overmind s -f Procfile.dev'
+alias lief='
+bundle
+yarn
+rake db:migrate
+'
+alias rbc='bundle exec rubocop -a'
 
 . $(brew --prefix asdf)/asdf.sh
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
