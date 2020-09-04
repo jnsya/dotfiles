@@ -110,6 +110,7 @@ alias gco='fzf-git-checkout '
 alias gd='git diff'
 alias gl='git lg '
 alias gr='git reset '
+alias grs='git restore --staged '
 # diffs committed changes on current branch against master
 alias gdm='
 base=`git merge-base master HEAD`
