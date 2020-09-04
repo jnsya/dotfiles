@@ -103,12 +103,18 @@ source $ZSH/oh-my-zsh.sh
 
 alias gs='git status -sb '
 alias ga='git add '
-alias gb='git branch '
 alias gc='git commit'
-alias gd='git diff'
+alias gb='fzf-git-branch'
 alias go='git checkout '
+alias gco='fzf-git-checkout '
+alias gd='git diff'
 alias gl='git lg '
 alias gr='git reset '
+# diffs committed changes on current branch against master
+alias gdm='
+base=`git merge-base master HEAD`
+git diff $base HEAD
+'
 
 alias be='bundle exec '
 
@@ -120,6 +126,48 @@ yarn
 rake db:migrate
 '
 alias rbc='bundle exec rubocop -a'
+#
+# GIT heart FZF
+# -------------
+
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
 
 . $(brew --prefix asdf)/asdf.sh
 source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
