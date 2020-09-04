@@ -123,7 +123,7 @@ alias ovm='overmind s -f Procfile.dev'
 alias lief='
 bundle
 yarn
-rake db:migrate
+rake db:migrate_dev
 '
 alias rbc='bundle exec rubocop -a'
 #
