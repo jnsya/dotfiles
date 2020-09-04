@@ -24,6 +24,9 @@ Plugin 'junegunn/fzf.vim'
 " Git wrapper
 Plugin 'tpope/vim-fugitive'
 
+" Git visualisation 
+Plugin 'idanarye/vim-merginal'
+
 " Comment stuff out with gcc
 Plugin 'tpope/vim-commentary'
 
@@ -39,6 +42,14 @@ Plugin 'tpope/vim-endwise'
 Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'neoclide/coc.nvim'
+
+Plugin 'burnettk/vim-angular'
+
+Plugin 'pangloss/vim-javascript'
+
+" Hybrid of relative and absolute line numbers
+Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
 call vundle#end()            
 
 " Basics ---------------------------------------------------------------- {{{
@@ -105,8 +116,7 @@ map <Leader>s :call RunNearestSpec()<CR>
 map <Leader>l :call RunLastSpec()<CR>
 map <Leader>a :call RunAllSpecs()<CR>
 
-set number
-
+:set number relativenumber
 
 " Ctrl-j/k deletes blank line below/above
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
@@ -143,6 +153,9 @@ set grepprg=rg\ --vimgrep\ --smart-case\ --follow
 " Use fzf for fuzzy filename search and in-file search
 nnoremap <C-t> :Files<Cr>
 nnoremap <C-f> :Rg<Cr>
+
+" (R)eplace current word (with confirmation)
+nnoremap <leader>r yiw:%s/\<<C-r>"\>//gc<left><left><left>
 
 " Command to ignore filename when searching, but it also gets rid of the
 " preview box.
