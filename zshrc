@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias gs='git status -sb '
 alias ga='git add '
+alias gap='git add -p '
 alias gc='git commit'
 alias gb='fzf-git-branch'
 alias go='git checkout '
