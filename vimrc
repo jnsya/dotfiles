@@ -3,6 +3,7 @@ filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
+set runtimepath+=~/.vim/bundle/LanguageClient-neovim
 
 call vundle#begin()
 
@@ -49,6 +50,18 @@ Plugin 'pangloss/vim-javascript'
 
 " Hybrid of relative and absolute line numbers
 Plugin 'jeffkreeftmeijer/vim-numbertoggle'
+
+Plugin 'elzr/vim-json'
+
+Plugin 'vim-utils/vim-ruby-fold'
+
+Plugin 'autozimu/LanguageClient-neovim'
+
+Plugin 'christoomey/vim-tmux-navigator'
+
+Plugin 'tpope/vim-surround'
+
+Plugin 'chiel92/vim-autoformat'
 
 call vundle#end()            
 
@@ -122,7 +135,7 @@ map <Leader>a :call RunAllSpecs()<CR>
 nnoremap <silent><C-j> m`:silent +g/\m^\s*$/d<CR>``:noh<CR>
 nnoremap <silent><C-k> m`:silent -g/\m^\s*$/d<CR>``:noh<CR>
 
-" Start interactive EasyAlign in visual mode (e.g. vipga)
+" Start interactive EasyAlign (align) in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
@@ -164,9 +177,13 @@ nnoremap <leader>r yiw:%s/\<<C-r>"\>//gc<left><left><left>
 " }}}
 
 " Folding ---------------------------------------------------------------- {{{
-" set foldmethod=syntax
-" set foldlevelstart=1
-
+" fold everything with zm
+" unfold everything with zr
+set foldmethod=syntax   "fold based on syntax (except for haml below)
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+autocmd BufNewFile,BufRead *.haml setl foldmethod=indent nofoldenable
+autocmd! FileType nofile setl foldmethod=indent nofoldenable
 " }}}
 
 " Copy paste ---------------------------------------------------------------- {{{
@@ -203,3 +220,17 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 
 " }}}
+
+let g:vim_json_syntax_conceal = 0
+
+" Required for operations modifying multiple buffers like rename.
+set hidden
+
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['/Users/jnsya/.asdf/shims/solargraph', 'stdio'],
+    \ }
+
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
