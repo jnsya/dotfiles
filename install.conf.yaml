@@ -8,6 +8,7 @@
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
+    ~/.doom.d:
 
 - create:
     - ~/downloads
