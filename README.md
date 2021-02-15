@@ -10,6 +10,7 @@ It's useful for me to have my dotfiles under source control, so that they are: b
 - `gitconfig` the prettier git log alias is the most interesting thing in here
 - `vimrc` my vim setup, though Doom is my primary editor nowadays
 - `zshrc` [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) stuff
+- `Brewfile` important packages
 
 ## Simplified instructions (because I always forget)
 

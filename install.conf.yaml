@@ -9,6 +9,7 @@
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.doom.d:
+    ~/Brewfile: Brewfile
 
 - create:
     - ~/downloads
