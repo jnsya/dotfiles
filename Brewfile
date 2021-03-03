@@ -3,6 +3,7 @@ brew "elasticsearch"
 brew "redis"
 brew "imagemagick"
 brew "yarn"
+brew "postgresql"
 
 # asdf
 brew "asdf"
@@ -28,6 +29,7 @@ brew "z"
 brew "tree"
 brew "tldr"
 brew "htop"
+brew 'bash-completion'
 
 # doom emacs and dependencies
 tap "d12frosted/emacs-plus"
@@ -37,7 +39,14 @@ brew "ripgrep"
 
 # cask
 tap "homebrew/cask"
+cask 'iterm2'
+cask 'docker'
 cask "spectacle"
+cask 'dash'
+cask 'spotify'
+cask 'slack'
+cask 'zoom'
+cask 'lastpass'
 
 tap "homebrew/cask-fonts"
 cask "font-fira-code"
