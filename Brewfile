@@ -21,6 +21,7 @@ brew "curl"
 
 # workflow & editors
 brew "vim"
+brew "neovim"
 brew "fzf"
 brew "git"
 brew "zsh"
