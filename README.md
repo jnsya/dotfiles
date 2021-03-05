@@ -34,6 +34,7 @@ Dotfiles:
 - ensure that this repo's version of `zshrc` has not been overwritten by the oh-my-zsh default
 - install syntax highlighting plugin: `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
 - `source ~/.zshrc`
+- `/usr/local/opt/fzf/install` enable fuzzy completion with fzf
 
 Install Doom
 ```
