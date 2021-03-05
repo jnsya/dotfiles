@@ -4,6 +4,7 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/jnsya/.oh-my-zsh"
 
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -71,7 +72,7 @@ unsetopt BEEP
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent rails)
+plugins=(git ssh-agent rails zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +102,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# GIT
 alias gs='git status -sb '
 alias ga='git add '
 alias gap='git add -p '
@@ -118,16 +120,10 @@ base=`git merge-base master HEAD`
 git diff $base HEAD
 '
 
+# RUBY
 alias be='bundle exec '
-
-# Shortcuts for common work tasks
-alias ovm='overmind s -f Procfile.dev'
-alias lief='
-bundle
-yarn
-rake db:migrate_dev
-'
 alias rbc='bundle exec rubocop -a'
+
 #
 # GIT heart FZF
 # -------------
@@ -172,7 +168,6 @@ fzf-git-checkout() {
 }
 
 . $(brew --prefix asdf)/asdf.sh
-source ~/.oh-my-zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 . `brew --prefix`/etc/profile.d/z.sh
 
 export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
@@ -192,4 +187,3 @@ fi
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
-
