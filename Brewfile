@@ -52,6 +52,7 @@ cask 'slack'
 cask 'zoom'
 cask 'lastpass'
 cask 'private-internet-access'
+cask 'anki'
 
 tap 'homebrew/cask-fonts'
 cask 'font-fira-code'
