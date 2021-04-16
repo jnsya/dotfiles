@@ -26,7 +26,6 @@ brew 'zsh'
 brew 'bash-completion'
 
 # tools
-brew 'docker-compose'
 brew 'fzf'
 brew 'git'
 brew 'pgcli'
@@ -44,7 +43,6 @@ brew 'ripgrep'
 # cask
 tap 'homebrew/cask'
 cask 'iterm2'
-cask 'docker'
 cask 'spectacle'
 cask 'dash'
 cask 'spotify'
