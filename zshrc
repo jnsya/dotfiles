@@ -167,7 +167,6 @@ fzf-git-checkout() {
     fi
 }
 
-. $(brew --prefix asdf)/asdf.sh
 . `brew --prefix`/etc/profile.d/z.sh
 
 export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
@@ -187,3 +186,4 @@ fi
 
 export VISUAL=vim
 export EDITOR="$VISUAL"
+eval "$(rbenv init -)"
