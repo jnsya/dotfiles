@@ -51,6 +51,8 @@ cask 'zoom'
 cask 'lastpass'
 cask 'private-internet-access'
 cask 'anki'
+cask 'notion'
+# cask 'docker'
 
 tap 'homebrew/cask-fonts'
 cask 'font-fira-code'
