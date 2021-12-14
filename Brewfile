@@ -1,12 +1,14 @@
 # databases & deps
-brew 'elasticsearch'
+# brew 'elasticsearch'
 brew 'redis'
 brew 'imagemagick'
 brew 'yarn'
 brew 'postgresql'
+brew 'awscli'
 
 # asdf
-brew 'asdf'
+# brew 'asdf'
+brew 'rbenv'
 brew 'coreutils'
 brew 'automake'
 brew 'autoconf'
@@ -33,6 +35,7 @@ brew 'z'
 brew 'tree'
 brew 'tldr'
 brew 'htop'
+brew 'diff-so-fancy'
 
 # doom emacs and dependencies
 tap 'd12frosted/emacs-plus'
@@ -52,7 +55,7 @@ cask 'lastpass'
 cask 'private-internet-access'
 cask 'anki'
 cask 'notion'
-# cask 'docker'
+cask 'docker'
 
 tap 'homebrew/cask-fonts'
 cask 'font-fira-code'

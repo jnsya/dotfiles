@@ -43,6 +43,12 @@ git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
 export PATH=$PATH:~/.emacs.d/bin
 ```
 
+Install [Aweseome Vim](https://github.com/amix/vimrc)
+```
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
+```
+
 ## Thanks
 
 This is a fork of [Dotbot](https://github.com/anishathalye/dotbot).
