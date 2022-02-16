@@ -187,3 +187,4 @@ fi
 export VISUAL=vim
 export EDITOR="$VISUAL"
 eval "$(rbenv init -)"
+export PATH="/usr/local/sbin:$PATH"
