@@ -188,3 +188,29 @@ export VISUAL=vim
 export EDITOR="$VISUAL"
 eval "$(rbenv init -)"
 export PATH="/usr/local/sbin:$PATH"
+
+#
+# Latana
+# -------------
+
+# Runs kubectl get pods using the currect directory to get the namespace
+# Usage: `kubessh <ENV> <SUBENV>`
+#
+#   Example:
+#     if you're inside LatanaMetrics dir and run
+#       $ kubessh staging web
+#     it will be equivilent to
+#       $ kubectl -n latanametrics-staging exec -it <SOME-POD> bash
+kubessh () {
+  environment=$1
+  subenv=$2
+  working_dir=${PWD##*/}
+  project=$(echo "$working_dir" | tr '[:upper:]' '[:lower:]' )
+  namespace="$project-$environment"
+
+  output=$(kubectl -n "$namespace" get pods | grep "$subenv" | head -n 1)
+  podname=${output%% *}
+  echo "ssh-ing you into $podname . . ."
+
+  kubectl -n $namespace exec -it $podname bash
+}
