@@ -7,7 +7,7 @@
 [push]
 	default = current
 [core]
-	editor = vim
+	editor = nvim
 	pager = less -F -X
 [alias]
 	st = status
@@ -17,7 +17,7 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	dump = cat-file -p
 [gui]
-	editor = vim
+	editor = nvim
 
 [rerere]
 	enabled = 1
