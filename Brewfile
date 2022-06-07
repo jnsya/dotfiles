@@ -1,13 +1,10 @@
 # databases & deps
-# brew 'elasticsearch'
 brew 'redis'
 brew 'imagemagick'
 brew 'yarn'
 brew 'postgresql'
 brew 'awscli'
 
-# asdf
-# brew 'asdf'
 brew 'rbenv'
 brew 'coreutils'
 brew 'automake'
@@ -52,7 +49,6 @@ cask 'spotify'
 cask 'slack'
 cask 'zoom'
 cask 'lastpass'
-cask 'private-internet-access'
 cask 'anki'
 cask 'notion'
 cask 'docker'
