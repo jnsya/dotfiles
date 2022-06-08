@@ -5,24 +5,30 @@
 #		OH-MY-ZSH
 #
 ##########################################
-# Note: Plugins and Theme need to be loaded BEFORE sourcing the oh-my-zsh config file
+# Note: Plugins and Theme need to be loaded BEFORE sourcing the oh-my-zsh config file, or stuff breaks.
 # Theme
 ZSH_THEME="robbyrussell"
 # Plugins
-plugins=(zsh-syntax-highlighting)
+# Note: new plugins should be installed at `~/.oh-my-zsh/custom/plugins`, then added to this list.
+plugins=(
+zsh-syntax-highlighting
+fzf-tab # Functions which use fzf to fuzzy search. eg: fzf-kill to select a process to kill.
+)
 # Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 # Loads oh-my-zsh
 source $ZSH/oh-my-zsh.sh
 # Turn off all beeps
 unsetopt BEEP
+# Set neovim as default editor
+export VISUAL=nvim
+export EDITOR="$VISUAL"
 
 ##########################################
 #
 #		  GIT
 #
 ##########################################
-
 # I use these aliases daily
 # alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
 alias gco='fzf-git-checkout ' # fuzzy search branch then checkout (see fzf section)
@@ -53,7 +59,6 @@ alias rbc='bundle exec rubocop -a'
 #		  FZF
 #
 ##########################################
-
 # FZF is a general-purpose fuzzy-finder.
 
 # GENERAL CONFIGURATION
@@ -122,11 +127,11 @@ export PATH=~/.emacs.d/bin:$PATH
 #           	LATANA
 #
 ##########################################
-
+# Switches to the correct context using 'kubectl ctx [staging|production]
 # Runs kubectl get pods using the currect directory to get the namespace
 # Usage: `kubessh <ENV> <SUBENV>`
 #
-#   Example:
+#   Example: 
 #     if you're inside LatanaMetrics dir and run
 #       $ kubessh staging web
 #     it will be equivilent to
@@ -138,33 +143,30 @@ kubessh () {
   project=$(echo "$working_dir" | tr '[:upper:]' '[:lower:]' )
   namespace="$project-$environment"
 
+  context=$(kubectx | grep "$environment")
+  kubectx $context
+
   output=$(kubectl -n "$namespace" get pods | grep "$subenv" | head -n 1)
-  podname=${output%% *}
-  echo "ssh-ing you into $podname . . ."
+  podname=${output%% *}; remainder="${remainder#* }"
+
+  echo "ssh-ing you into $podname. . ."
 
   kubectl -n $namespace exec -it $podname bash
 }
-
 ##########################################
 #
-#           Unknown!
+#       CONFIGURING EXECUTABLES
 #
 ##########################################
 
-# I added these at some point without specifying what they're for. Now I don't remember.
-
+# Config for the z executable. This line is suggested by `brew info z`.
 . `brew --prefix`/etc/profile.d/z.sh
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-export VISUAL=nvim
-export EDITOR="$VISUAL"
-eval "$(rbenv init -)"
+# One executable I needed was installed in sbin, so I added it to PATH
 export PATH="/usr/local/sbin:$PATH"
+
+# Sets up rbenv's shims path, among other things. See https://github.com/rbenv/rbenv#how-rbenv-hooks-into-your-shell
+eval "$(rbenv init -)"
 
 ##########################################
 #
