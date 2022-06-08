@@ -5,7 +5,7 @@ brew 'yarn'
 brew 'postgresql'
 brew 'awscli'
 
-brew 'rbenv'
+brew 'rbenv' # Ruby version manager
 brew 'coreutils'
 brew 'automake'
 brew 'autoconf'
@@ -25,20 +25,20 @@ brew 'zsh'
 brew 'bash-completion'
 
 # tools
-brew 'fzf'
+brew 'fzf' # General-purpose fuzzyfinder. Used in command-line and Vim.
 brew 'git'
 brew 'pgcli'
-brew 'z'
+brew 'z' 	# Like `cd`, but way better. Teleport between disparate directories.
 brew 'tree'
-brew 'tldr'
-brew 'htop'
+brew 'tldr' # Terser man pages.
+brew 'htop' # Top but colourfuller: interactive process viewer.
 brew 'diff-so-fancy'
 
 # doom emacs and dependencies
 tap 'd12frosted/emacs-plus'
 brew 'emacs-plus'
 brew 'fd'
-brew 'ripgrep'
+brew 'ripgrep' # Superfast grep. Also used by fzf.
 
 # cask
 tap 'homebrew/cask'
