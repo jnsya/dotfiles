@@ -1,18 +1,180 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# Note: Run `source ~/.zshrc` to reload this file after making changes
 
-# Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
-
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+##########################################
+#
+#		OH-MY-ZSH
+#
+##########################################
+# Note: Plugins and Theme need to be loaded BEFORE sourcing the oh-my-zsh config file
+# Theme
 ZSH_THEME="robbyrussell"
-
+# Plugins
+plugins=(zsh-syntax-highlighting)
+# Path to oh-my-zsh installation.
+export ZSH="$HOME/.oh-my-zsh"
+# Loads oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 # Turn off all beeps
 unsetopt BEEP
+
+##########################################
+#
+#		  GIT
+#
+##########################################
+
+# I use these aliases daily
+# alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
+alias gco='fzf-git-checkout ' # fuzzy search branch then checkout (see fzf section)
+alias gl='git lg '
+alias gs='git status -sb '
+alias ga='git add '
+alias gap='git add -p '
+alias gc='git commit'
+alias go='git checkout '
+alias gd='git diff'
+
+# Diff committed changes on current branch against master
+alias gdm='
+base=`git merge-base master HEAD`
+git diff $base HEAD
+'
+
+##########################################
+#
+#		  RUBY
+#
+##########################################
+alias be='bundle exec '
+alias rbc='bundle exec rubocop -a'
+
+##########################################
+#
+#		  FZF
+#
+##########################################
+
+# FZF is a general-purpose fuzzy-finder.
+
+# GENERAL CONFIGURATION
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
+
+# GIT FUNCTIONS
+
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+fzf-down() {
+  fzf --height 50% "$@" --border
+}
+
+# Useful fuzzy git branch function. Used in an alias above.
+fzf-git-branch() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    git branch --color=always --all --sort=-committerdate |
+        grep -v HEAD |
+        fzf --height 50% --ansi --no-multi --preview-window right:65% \
+            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
+        sed "s/.* //"
+}
+
+# Extremely useful fuzzy git checkout function. Used in an alias above.
+fzf-git-checkout() {
+    git rev-parse HEAD > /dev/null 2>&1 || return
+
+    local branch
+
+    branch=$(fzf-git-branch)
+    if [[ "$branch" = "" ]]; then
+        echo "No branch selected."
+        return
+    fi
+
+    # If branch name starts with 'remotes/' then it is a remote branch. By
+    # using --track and a remote branch name, it is the same as:
+    # git checkout -b branchName --track origin/branchName
+    if [[ "$branch" = 'remotes/'* ]]; then
+        git checkout --track $branch
+    else
+        git checkout $branch;
+    fi
+}
+
+##########################################
+#
+#           	DOOM EMACS
+#
+##########################################
+export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
+export PATH=~/.emacs.d/bin:$PATH
+
+
+##########################################
+#
+#           	LATANA
+#
+##########################################
+
+# Runs kubectl get pods using the currect directory to get the namespace
+# Usage: `kubessh <ENV> <SUBENV>`
+#
+#   Example:
+#     if you're inside LatanaMetrics dir and run
+#       $ kubessh staging web
+#     it will be equivilent to
+#       $ kubectl -n latanametrics-staging exec -it <SOME-POD> bash
+kubessh () {
+  environment=$1
+  subenv=$2
+  working_dir=${PWD##*/}
+  project=$(echo "$working_dir" | tr '[:upper:]' '[:lower:]' )
+  namespace="$project-$environment"
+
+  output=$(kubectl -n "$namespace" get pods | grep "$subenv" | head -n 1)
+  podname=${output%% *}
+  echo "ssh-ing you into $podname . . ."
+
+  kubectl -n $namespace exec -it $podname bash
+}
+
+##########################################
+#
+#           Unknown!
+#
+##########################################
+
+# I added these at some point without specifying what they're for. Now I don't remember.
+
+. `brew --prefix`/etc/profile.d/z.sh
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
+export VISUAL=nvim
+export EDITOR="$VISUAL"
+eval "$(rbenv init -)"
+export PATH="/usr/local/sbin:$PATH"
+
+##########################################
+#
+#           BOILERPLATE
+#
+##########################################
+
+# The following commented lines all came automatically with the original zshrc.
+# They might contain useful stuff so I won't delete them.
+
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -67,14 +229,6 @@ unsetopt BEEP
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
-# Which plugins would you like to load?
-# Standard plugins can be found in ~/.oh-my-zsh/plugins/*
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent rails zsh-syntax-highlighting)
-
-source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
@@ -102,115 +256,3 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-# GIT
-alias gs='git status -sb '
-alias ga='git add '
-alias gap='git add -p '
-alias gc='git commit'
-alias gb='fzf-git-branch'
-alias go='git checkout '
-alias gco='fzf-git-checkout '
-alias gd='git diff'
-alias gl='git lg '
-alias gr='git reset '
-alias grs='git restore --staged '
-# diffs committed changes on current branch against master
-alias gdm='
-base=`git merge-base master HEAD`
-git diff $base HEAD
-'
-
-# RUBY
-alias be='bundle exec '
-alias rbc='bundle exec rubocop -a'
-
-#
-# GIT heart FZF
-# -------------
-
-is_in_git_repo() {
-  git rev-parse HEAD > /dev/null 2>&1
-}
-
-fzf-down() {
-  fzf --height 50% "$@" --border
-}
-
-fzf-git-branch() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    git branch --color=always --all --sort=-committerdate |
-        grep -v HEAD |
-        fzf --height 50% --ansi --no-multi --preview-window right:65% \
-            --preview 'git log -n 50 --color=always --date=short --pretty="format:%C(auto)%cd %h%d %s" $(sed "s/.* //" <<< {})' |
-        sed "s/.* //"
-}
-
-fzf-git-checkout() {
-    git rev-parse HEAD > /dev/null 2>&1 || return
-
-    local branch
-
-    branch=$(fzf-git-branch)
-    if [[ "$branch" = "" ]]; then
-        echo "No branch selected."
-        return
-    fi
-
-    # If branch name starts with 'remotes/' then it is a remote branch. By
-    # using --track and a remote branch name, it is the same as:
-    # git checkout -b branchName --track origin/branchName
-    if [[ "$branch" = 'remotes/'* ]]; then
-        git checkout --track $branch
-    else
-        git checkout $branch;
-    fi
-}
-
-. `brew --prefix`/etc/profile.d/z.sh
-
-export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
-export PATH=~/.emacs.d/bin:$PATH
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-if type rg &> /dev/null; then
-  export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
-fi
-
-export VISUAL=vim
-export EDITOR="$VISUAL"
-eval "$(rbenv init -)"
-export PATH="/usr/local/sbin:$PATH"
-
-#
-# Latana
-# -------------
-
-# Runs kubectl get pods using the currect directory to get the namespace
-# Usage: `kubessh <ENV> <SUBENV>`
-#
-#   Example:
-#     if you're inside LatanaMetrics dir and run
-#       $ kubessh staging web
-#     it will be equivilent to
-#       $ kubectl -n latanametrics-staging exec -it <SOME-POD> bash
-kubessh () {
-  environment=$1
-  subenv=$2
-  working_dir=${PWD##*/}
-  project=$(echo "$working_dir" | tr '[:upper:]' '[:lower:]' )
-  namespace="$project-$environment"
-
-  output=$(kubectl -n "$namespace" get pods | grep "$subenv" | head -n 1)
-  podname=${output%% *}
-  echo "ssh-ing you into $podname . . ."
-
-  kubectl -n $namespace exec -it $podname bash
-}
