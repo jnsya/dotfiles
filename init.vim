@@ -33,9 +33,13 @@ nnoremap <leader>wl <c-w>l
 nnoremap <leader>ww <c-w>w " Toggle back and forth between open windows
 
 "NERDTree
- 
-" Toggle NERDTree
-nnoremap <leader>op :NERDTreeToggle<CR>
+" Find and reveal file for the active buffer in NERDTree 
+nnoremap <leader>op :NERDTreeFind<CR>
+" Close NERDTree
+nnoremap <leader>oP :NERDTreeClose<CR>
+
+" Use 'jj' to exit insert mode (quicker than pressing <ESC>)
+inoremap jj <Esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -45,6 +49,11 @@ nnoremap <leader>op :NERDTreeToggle<CR>
 
 " Visual colourscheme taken from the Nightfox Plugin
 colorscheme nightfox
+
+" Add linenumbers
+:set number
+" Set left spacing before linenumber
+:set numberwidth=5
 
 """""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -56,6 +65,7 @@ colorscheme nightfox
 command! Vimrc e ~/dotfiles/init.vim
 command! Zshrc e ~/dotfiles/zshrc
 command! Gitconfig e ~/dotfiles/gitconfig
+command! Brewfile e ~/dotfiles/Brewfile
 
 " Easier-to-type source vimrc command
 command! Sourcevimrc source $MYVIMRC | echo 'Succesfully sourced your init.vim!'
