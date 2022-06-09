@@ -20,6 +20,9 @@ Plug 'junegunn/fzf.vim'
 " Filesystem explorer
 Plug 'preservim/nerdtree'
 
+" Comment stuff out with `gcc`
+Plug 'tpope/vim-commentary'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -39,12 +42,13 @@ call plug#end()
 " Use the system clipboard, allowing copy+pasting from vim to another program,
 " and vice versa.
 set clipboard+=unnamedplus
+
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           MAPPINGS
 "
 """""""""""""""""""""""""""""""""""""""""""""""
-" SEARCH
+" SEARCH: LEADER+S
 " Open fzf filepicker for all files known to git
 nnoremap <leader><leader> :GFiles<CR>
 " Open fzf filepicker for filenames of open buffers (memory tip: SearchBuffers)
@@ -62,6 +66,9 @@ nnoremap <leader>wj <c-w>j
 nnoremap <leader>wk <c-w>k
 nnoremap <leader>wl <c-w>l
 nnoremap <leader>ww <c-w>w " Toggle back and forth between open windows
+
+" Yank local filepath of current buffer
+nnoremap <leader>fY :let @+=expand("%")<CR>
 
 " NERDTree
 " Find and reveal file for the active buffer in NERDTree 
