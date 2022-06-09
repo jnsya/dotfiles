@@ -21,6 +21,9 @@ It's useful for me to have my dotfiles under source control, so that they are: b
   - Run `./install`
 
 ## Brand new Mac fresh install steps
+
+TODO: Turn this into an automatic install script.
+
 Basics:
 - `xcode-select --install` install xcode
 - `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"` install homebrew

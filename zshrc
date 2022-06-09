@@ -81,6 +81,7 @@ fzf-down() {
 }
 
 # Useful fuzzy git branch function. Used in an alias above.
+# This and example below taken from: https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
 fzf-git-branch() {
     git rev-parse HEAD > /dev/null 2>&1 || return
 

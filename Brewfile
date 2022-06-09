@@ -31,7 +31,7 @@ brew 'pgcli'
 brew 'z' 	# Like `cd`, but way better. Teleport between disparate directories.
 brew 'tree'
 brew 'tldr' # Terser man pages.
-brew 'htop' # Top but colourfuller: interactive process viewer.
+brew 'htop' # Top but colourfuller. Interactive process viewer.
 brew 'diff-so-fancy'
 
 # doom emacs and dependencies
