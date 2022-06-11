@@ -10,6 +10,8 @@ nnoremap <SPACE> <Nop>
 
 call plug#begin()
 
+" Try the ReplaceWithRegister plugin (note to self!)
+
 " Colourscheme
 Plug 'EdenEast/nightfox.nvim'
 
@@ -35,8 +37,10 @@ call plug#end()
 " Searching for uppercase is case sensitive (ie, overrides the ignorecase setting
 " above for uppercase searches)
 :set smartcase
-" Add linenumbers
+" Show current line number (as the absolute line number)
 :set number
+" Show relative line numbers (except for current line, which remains absolute)
+set relativenumber             
 " Set a bit more left spacing before linenumber than default (which is 4)
 :set numberwidth=5
 " Use the system clipboard, allowing copy+pasting from vim to another program,
