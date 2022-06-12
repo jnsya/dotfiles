@@ -33,6 +33,7 @@ brew 'tree'
 brew 'tldr' # Terser man pages.
 brew 'htop' # Top but colourfuller. Interactive process viewer.
 brew 'diff-so-fancy'
+brew 'bat' # cat but better
 
 # doom emacs and dependencies
 tap 'd12frosted/emacs-plus'
