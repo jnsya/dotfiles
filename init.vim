@@ -10,8 +10,6 @@ nnoremap <SPACE> <Nop>
 
 call plug#begin()
 
-" Try the ReplaceWithRegister plugin (note to self!)
-
 " Colourscheme
 Plug 'EdenEast/nightfox.nvim'
 
@@ -24,6 +22,13 @@ Plug 'preservim/nerdtree'
 
 " Comment stuff out with `gcc`
 Plug 'tpope/vim-commentary'
+
+" Rails-specific commands. See mappings further down. `gf`, `:A`, `:R` and
+" `:Emodel!` are particularly useful.
+Plug 'tpope/vim-rails'
+
+" Use gr + motion to replace with register (eg griw to replace current word)
+Plug 'vim-scripts/ReplaceWithRegister'
 
 call plug#end()
 
@@ -52,16 +57,24 @@ set clipboard+=unnamedplus
 "           MAPPINGS
 "
 """""""""""""""""""""""""""""""""""""""""""""""
-" SEARCH: LEADER+S
+" Philosophy: I try to follow Doom's lead for leader mappings: https://github.com/doomemacs/doomemacs/blob/master/modules/config/default/+evil-bindings.el
+" I used Doom for a long time, and having mnemonic namespacing (eg `<leader> s` as the beginning of all search commands) made everything very memorable and discoverable.
+"
+" BUFFERS: LEADER + b
+" 
+" Open fzf filepicker for filenames of open buffers
+nnoremap <leader>bb :Buffers<CR>
+nnoremap <leader>b] :bnext<CR>
+nnoremap <leader>b[ :bprevious<CR>
+"
+" SEARCH: LEADER + s
 " Open fzf filepicker for all files known to git
 nnoremap <leader><leader> :GFiles<CR>
-" Open fzf filepicker for filenames of open buffers (memory tip: SearchBuffers)
-nnoremap <leader>sb :Buffers<CR>
 
 " Fuzzy search current project (memory tip: SearchProject)
 nnoremap <leader>sp :Rg<CR>
 
-" WINDOW NAVIGATION
+" WINDOW NAVIGATION: LEADER + w
 " Use <leader> w to navigate between windows
 nnoremap <leader>wv :vsplit<CR>
 nnoremap <leader>wc :close<CR>
@@ -83,6 +96,10 @@ nnoremap <leader>oP :NERDTreeClose<CR>
 " Use 'jj' to exit insert mode (quicker than pressing <ESC>)
 inoremap jj <Esc>
 
+" VIM-RAILS: MAPPINGS
+" Open the test file corresponding to the current file (and vice
+" versa)
+nnoremap <leader>a :A<CR>
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           APPEARANCE / VISUAL
