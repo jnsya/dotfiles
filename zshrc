@@ -12,7 +12,7 @@ ZSH_THEME="robbyrussell"
 # Note: new plugins should be installed at `~/.oh-my-zsh/custom/plugins`, then added to this list.
 plugins=(
 zsh-syntax-highlighting
-fzf-tab # Functions which use fzf to fuzzy search. eg: fzf-kill to select a process to kill.
+fzf-tab # Add functions which use fzf to fuzzy search. eg: fzf-kill to select a process to kill.
 )
 # Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -30,9 +30,9 @@ export EDITOR="$VISUAL"
 #
 ##########################################
 # I use these aliases daily
-# alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
+alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
 alias gco='fzf-git-checkout ' # fuzzy search branch then checkout (see fzf section)
-alias gl='git lg '
+alias gl='git lg ' # pretty and concise git log - see gitconfig
 alias gs='git status -sb '
 alias ga='git add '
 alias gap='git add -p '
@@ -80,7 +80,7 @@ fzf-down() {
   fzf --height 50% "$@" --border
 }
 
-# Useful fuzzy git branch function. Used in an alias above.
+# Useful fuzzy git branch function. Aliased above.
 # This and example below taken from: https://polothy.github.io/post/2019-08-19-fzf-git-checkout/
 fzf-git-branch() {
     git rev-parse HEAD > /dev/null 2>&1 || return
@@ -92,7 +92,7 @@ fzf-git-branch() {
         sed "s/.* //"
 }
 
-# Extremely useful fuzzy git checkout function. Used in an alias above.
+# Extremely useful fuzzy git checkout function. Aliased above.
 fzf-git-checkout() {
     git rev-parse HEAD > /dev/null 2>&1 || return
 

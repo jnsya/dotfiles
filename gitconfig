@@ -1,24 +1,27 @@
 [push]
 	default = current
+
 [user]
 	email = jonosenior@gmail.com
 	name = Jonathan Senior
-[push]
-	default = current
+
 [core]
 	editor = nvim
-	pager = less -F -X
+	# Prettier diff output (requires diff-so-fancy)
+	pager = diff-so-fancy | less --tabs=4 -RFX
+
 [alias]
-	st = status
-	br = branch
-	ci = commit
-	co = checkout
+	# Prettier and more concise git log, with one line per commit
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	dump = cat-file -p
+
 [gui]
 	editor = nvim
 
 [rerere]
 	enabled = 1
+
 [init]
 	defaultBranch = main
+
+[interactive]
+	diffFilter = diff-so-fancy --patch
