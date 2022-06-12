@@ -6,7 +6,6 @@
 
 - link:
     ~/.config/nvim/init.vim: init.vim
-    ~/.vimrc: vimrc
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.doom.d:
