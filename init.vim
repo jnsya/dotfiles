@@ -33,6 +33,9 @@ Plug 'tpope/vim-rails'
 " Use gr + motion to replace with register (eg griw to replace current word)
 Plug 'vim-scripts/ReplaceWithRegister'
 
+" Pretty markdown preview
+Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""
