@@ -71,6 +71,8 @@ cask 'notion'
 cask 'nordvpn' # VPN
 cask 'meetingbar' # Displays the day's upcoming meetings in the Mac menubar
 cask 'bluesnooze' # Sleeping mac = bluetooth off
+# cask 'postman' # GUI for HTTP requests
+# cask 'dbeaver-community' # SQL database client
 
 tap 'homebrew/cask-fonts'
 cask 'font-fira-code'
