@@ -23,6 +23,9 @@ Plug 'preservim/nerdtree'
 " Comment stuff out with `gcc`
 Plug 'tpope/vim-commentary'
 
+" Vim sugar for some UNIX shell commands
+Plug 'tpope/vim-eunuch'
+
 " Rails-specific commands. See mappings further down. `gf`, `:A`, `:R` and
 " `:Emodel!` are particularly useful.
 Plug 'tpope/vim-rails'
@@ -100,6 +103,11 @@ inoremap jj <Esc>
 " Open the test file corresponding to the current file (and vice
 " versa)
 nnoremap <leader>a :A<CR>
+
+" TERMINAL MODE
+" Use ESC to move from insert mode to normal mode, in terminal mode
+" :tnoremap <Esc> <C-\><C-n>
+
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           APPEARANCE / VISUAL
