@@ -36,6 +36,18 @@ Plug 'vim-scripts/ReplaceWithRegister'
 " Pretty markdown preview
 Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
 
+" Test runner
+Plug 'vim-test/vim-test'
+
+" Mostly for syntax highlighting
+Plug 'plasticboy/vim-markdown'
+
+" Language parser - useful for better syntax highlighting
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Notetaking and todo lists
+Plug 'vimwiki/vimwiki'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -108,8 +120,20 @@ inoremap jj <Esc>
 nnoremap <leader>a :A<CR>
 
 " TERMINAL MODE
-" Use ESC to move from insert mode to normal mode, in terminal mode
-" :tnoremap <Esc> <C-\><C-n>
+" Use ESC to move from insert mode to normal mode (but not if currently in an
+" fzf preview). See: https://github.com/junegunn/fzf.vim/issues/544#issuecomment-457456166
+au TermOpen * tnoremap <buffer> <Esc> <c-\><c-n>
+au FileType fzf tunmap <buffer> <Esc>
+
+" VIM-TEST
+let test#strategy = "neovim"
+let test#neovim#term_position = "vert"
+" Prepend all the vim-test commands so they run in docker container
+" (Obviously, this will only work for latanaapp)
+let g:test#ruby#rspec#executable='docker exec -t -e RAILS_ENV=test latanaapp rspec'
+
+nnoremap <leader>t :TestNearest<CR>
+nnoremap <leader>T :TestFile<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""
 "
@@ -120,6 +144,44 @@ nnoremap <leader>a :A<CR>
 " Visual colourscheme taken from the Nightfox Plugin
 colorscheme nightfox
 
+" Tell Vim that Jenkins files are really Groovy files (which they are), to syntax highlight correctly
+" https://ls3.io/posts/jenkinsfile_vim_highlighting/
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
+"""""""""""""""""""""""""""""""""""""""""""""""
+"
+"           PLUGIN SETTINGS
+"
+"""""""""""""""""""""""""""""""""""""""""""""""
+
+" VIM-MARKDOWN
+let g:vim_markdown_folding_disabled = 1 " Disable default folding in markdown because it's annoying
+
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- A list of parser names, or "all"
+  ensure_installed = { "ruby", "markdown", "json" },
+
+  indent = {
+    enable = true
+  },
+
+  highlight = {
+    -- `false` will disable the whole extension
+    enable = true,
+
+    -- Setting this to true will run `:h syntax` and tree-sitter at the same time (which can be slow)
+    additional_vim_regex_highlighting = false,
+  },
+}
+EOF
+
+" VimWiki
+nmap <Leader>vv <Plug>VimwikiIndex
+let g:vimwiki_list = [{'path': '~/notes/',
+                       \ 'syntax': 'markdown', 'ext': '.md'}]
+
+au FileType vimwiki setlocal shiftwidth=2 noexpandtab
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           COMMANDS
@@ -134,3 +196,6 @@ command! Brewfile e ~/dotfiles/Brewfile
 
 " Easier-to-type source vimrc command
 command! Sourcevimrc source $MYVIMRC | echo 'Succesfully sourced your init.vim!'
+
+" Command to edit todo file
+command! Todo e ~/notes/Todo_Today.md

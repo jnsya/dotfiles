@@ -13,6 +13,7 @@ ZSH_THEME="robbyrussell"
 plugins=(
 zsh-syntax-highlighting
 fzf-tab # Add functions which use fzf to fuzzy search. eg: fzf-kill to select a process to kill.
+zsh-vi-mode # Better, more vimlike vim mode
 )
 # Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -33,6 +34,7 @@ export EDITOR="$VISUAL"
 alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
 alias gco='fzf-git-checkout ' # fuzzy search branch then checkout (see fzf section)
 alias gl='git lg ' # pretty and concise git log - see gitconfig
+alias gln='git lg -n 20' # above, but more logs
 alias gs='git status -sb '
 alias ga='git add '
 alias gap='git add -p '

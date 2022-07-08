@@ -46,6 +46,7 @@ brew 'glow' # Beautiful CLI markdown renderer: .md files look good on the comman
 brew 'neovim'
 brew 'zsh'
 brew 'bash-completion'
+brew 'treesitter' # Parses computer languages (used for better syntax highlighting etc by neovim)
 
 # kubernetes & docker
 cask 'docker'
