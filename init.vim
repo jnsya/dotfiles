@@ -48,7 +48,7 @@ Plug 'vim-test/vim-test'
 Plug 'plasticboy/vim-markdown'
 
 " Language parser - useful for better syntax highlighting
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Notetaking and todo lists
 Plug 'vimwiki/vimwiki'
