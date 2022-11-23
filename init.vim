@@ -10,6 +10,8 @@ nnoremap <SPACE> <Nop>
 
 call plug#begin()
 
+Plug 'github/copilot.vim'
+
 " Colourscheme
 Plug 'EdenEast/nightfox.nvim'
 
@@ -46,10 +48,18 @@ Plug 'vim-test/vim-test'
 Plug 'plasticboy/vim-markdown'
 
 " Language parser - useful for better syntax highlighting
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Notetaking and todo lists
 Plug 'vimwiki/vimwiki'
+
+" Move cursor to next occurence of "ab" with `sab` (then `;` for subsequent
+" matches)
+Plug 'justinmk/vim-sneak'
+
+" Snippets engine then the actual snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 
@@ -95,6 +105,11 @@ nnoremap <leader><leader> :GFiles<CR>
 " Fuzzy search current project (memory tip: SearchProject)
 nnoremap <leader>sp :Rg<CR>
 
+" Search a particular directory, like this: `:Rg2 search_term directory_name`
+" Taken from https://github.com/junegunn/fzf.vim/issues/837#issuecomment-1179386300
+command! -bang -nargs=* Rg2
+  \ call fzf#vim#grep("rg --column --line-number --no-heading --color=always --smart-case ".<q-args>, 1, {'dir': system('git -C '.expand('%:p:h').' rev-parse --show-toplevel 2> /dev/null')[:-2]}, <bang>0)
+
 " WINDOW NAVIGATION: LEADER + w
 " Use <leader> w to navigate between windows
 nnoremap <leader>wv :vsplit<CR>
@@ -107,6 +122,7 @@ nnoremap <leader>ww <c-w>w " Toggle back and forth between open windows
 
 " Yank local filepath of current buffer
 nnoremap <leader>fY :let @+=expand("%")<CR>
+nnoremap <leader>fs :w<CR>
 
 " NERDTree
 " Find and reveal file for the active buffer in NERDTree 
@@ -114,8 +130,8 @@ nnoremap <leader>op :NERDTreeFind<CR>
 " Close NERDTree
 nnoremap <leader>oP :NERDTreeClose<CR>
 
-" Use 'jj' to exit insert mode (quicker than pressing <ESC>)
-inoremap jj <Esc>
+" Use 'jk' to exit insert mode (quicker than pressing <ESC>)
+inoremap jk <Esc>
 
 " VIM-RAILS: MAPPINGS
 " Open the test file corresponding to the current file (and vice
@@ -138,6 +154,8 @@ let g:test#ruby#rspec#executable='docker exec -t -e RAILS_ENV=test latanaapp rsp
 nnoremap <leader>t :TestNearest<CR>
 nnoremap <leader>T :TestFile<CR>
 
+" 
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           APPEARANCE / VISUAL
@@ -159,25 +177,6 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 
 " VIM-MARKDOWN
 let g:vim_markdown_folding_disabled = 1 " Disable default folding in markdown because it's annoying
-
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  -- A list of parser names, or "all"
-  ensure_installed = { "ruby", "markdown", "json" },
-
-  indent = {
-    enable = true
-  },
-
-  highlight = {
-    -- `false` will disable the whole extension
-    enable = true,
-
-    -- Setting this to true will run `:h syntax` and tree-sitter at the same time (which can be slow)
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
 
 " VimWiki
 nmap <Leader>vv <Plug>VimwikiIndex
