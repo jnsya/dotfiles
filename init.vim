@@ -41,6 +41,9 @@ Plug 'ellisonleao/glow.nvim', {'branch': 'main'}
 " Language Server Protocol setup
 Plug 'neovim/nvim-lspconfig'
 
+" Applies configuration from any .editorconfig files
+Plug 'gpanders/editorconfig.nvim'
+
 " Test runner
 Plug 'vim-test/vim-test'
 
@@ -60,6 +63,9 @@ Plug 'justinmk/vim-sneak'
 " Snippets engine then the actual snippets
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+
+" Git blame
+Plug 'f-person/git-blame.nvim'
 
 call plug#end()
 
@@ -83,6 +89,7 @@ set relativenumber
 " and vice versa.
 set clipboard+=unnamedplus
 
+filetype indent plugin on
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           MAPPINGS
@@ -181,7 +188,7 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 lua << EOF
 require'nvim-treesitter.configs'.setup {
   -- A list of parser names, or "all"
-  ensure_installed = { "ruby", "typescript", "javascript", "html", "css" },
+  ensure_installed = { "ruby", "typescript", "javascript", "html", "css", "vim", "dockerfile", "bash", "yaml" },
 
   -- Install parsers synchronously (only applied to `ensure_installed`)
   sync_install = false,
@@ -209,6 +216,10 @@ let g:vimwiki_list = [{'path': '~/notes/',
                        \ 'syntax': 'markdown', 'ext': '.md'}]
 
 au FileType vimwiki setlocal shiftwidth=2 noexpandtab
+
+" GIT BLAME
+let g:gitblame_enabled = 0 "Disable on startup
+
 """""""""""""""""""""""""""""""""""""""""""""""
 "
 "           COMMANDS
