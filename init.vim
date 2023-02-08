@@ -67,6 +67,11 @@ Plug 'honza/vim-snippets'
 " Git blame
 Plug 'f-person/git-blame.nvim'
 
+" Colourscheme
+Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
+
+Plug 'ellisonleao/gruvbox.nvim'
+
 call plug#end()
 
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -88,6 +93,9 @@ set relativenumber
 " Use the system clipboard, allowing copy+pasting from vim to another program,
 " and vice versa.
 set clipboard+=unnamedplus
+
+" If file has changed (eg due to git checkout), reload it
+:set autoread
 
 filetype indent plugin on
 """""""""""""""""""""""""""""""""""""""""""""""
@@ -170,7 +178,10 @@ vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
 """""""""""""""""""""""""""""""""""""""""""""""
 
 " Visual colourscheme taken from the Nightfox Plugin
-colorscheme nightfox
+" colorscheme nightfox
+" colorscheme catppuccin " catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
+set background=dark " or light if you want light mode
+colorscheme gruvbox
 
 " Tell Vim that Jenkins files are really Groovy files (which they are), to syntax highlight correctly
 " https://ls3.io/posts/jenkinsfile_vim_highlighting/
