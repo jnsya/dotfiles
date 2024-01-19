@@ -60,6 +60,7 @@ brew 'fd' # Fast, user-friendly find alternative
 
 # casks (graphical applications)
 tap 'homebrew/cask'
+cask 'visual-studio-code'
 cask 'iterm2'
 cask 'spectacle' # Window tiling manager
 cask 'dash'
