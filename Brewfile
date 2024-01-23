@@ -50,6 +50,7 @@ brew 'treesitter' # Parses computer languages (used for better syntax highlighti
 
 # kubernetes & docker
 cask 'docker'
+brew 'docker-compose'
 brew 'kubectx'
 brew 'kubernetes-cli'
 
