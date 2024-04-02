@@ -169,7 +169,9 @@ kubessh () {
 export PATH="/usr/local/sbin:$PATH"
 
 # Sets up rbenv's shims path, among other things. See https://github.com/rbenv/rbenv#how-rbenv-hooks-into-your-shell
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 ##########################################
 #
