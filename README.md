@@ -48,7 +48,7 @@ These Dotfiles:
 - `cd ~/dotfiles && ./install` add these dotfiles
 - `brew bundle` installs every package and cask from the Brewfile
 - `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` install oh-my-zsh
-- ensure that this repo's version of `zshrc` has not been overwritten by the oh-my-zsh default
+- `rm ~/.zshrc` then `./install` again to ensure that this repo's version of `zshrc` has not been overwritten by the oh-my-zsh default
 - install syntax highlighting plugin: `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
 - `source ~/.zshrc`
 - `(brew --prefix)/opt/fzf/install` enable fuzzy completion with fzf

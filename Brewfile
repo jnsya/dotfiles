@@ -8,7 +8,7 @@
 # Some tools are commented out because I don't need them on every new install.
 
 # databases
-brew 'redis'
+# brew 'redis'
 # brew 'imagemagick'
 # brew 'yarn'
 # brew 'postgresql'
@@ -29,7 +29,7 @@ brew 'libtool'
 brew 'unixodbc'
 brew 'unzip'
 brew 'curl'
-brew 'awscli'
+# brew 'awscli'
 
 # modern unix (https://github.com/ibraheemdev/modern-unix)
 brew 'bat' # Cat, but better. File viewer
@@ -51,8 +51,8 @@ brew 'treesitter' # Parses computer languages (used for better syntax highlighti
 # kubernetes & docker
 cask 'docker'
 brew 'docker-compose'
-brew 'kubectx'
-brew 'kubernetes-cli'
+# brew 'kubectx'
+# brew 'kubernetes-cli'
 
 # doom emacs and dependencies
 # tap 'd12frosted/emacs-plus'
@@ -62,16 +62,20 @@ brew 'fd' # Fast, user-friendly find alternative
 # casks (graphical applications)
 tap 'homebrew/cask'
 cask 'visual-studio-code'
+cask 'cursor'
+cask 'claude'
 cask 'iterm2'
-cask 'spectacle' # Window tiling manager
+cask 'rectangle' # Window tiling manager (replaced Spectacle)
 cask 'dash'
 cask 'spotify'
-cask 'slack'
+cask 'obsidian' # Note-taking in markdown
+# cask 'slack'
 cask 'zoom'
 cask 'lastpass'
-cask 'anki' # Flashcards for remembering stuff
-cask 'notion'
-cask 'nordvpn' # VPN
+cask 'telegram'
+# cask 'anki' # Flashcards for remembering stuff
+# cask 'notion'
+# cask 'nordvpn' # VPN
 cask 'meetingbar' # Displays the day's upcoming meetings in the Mac menubar
 cask 'bluesnooze' # Sleeping mac = bluetooth off
 # cask 'postman' # GUI for HTTP requests
