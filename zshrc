@@ -136,14 +136,8 @@ alias lt='eza --tree --icons --git-ignore'      # tree view (respects .gitignore
 # One executable I needed was installed in sbin, so I added it to PATH
 export PATH="/usr/local/sbin:$PATH"
 
-# Sets up rbenv's shims path, among other things. See https://github.com/rbenv/rbenv#how-rbenv-hooks-into-your-shell
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# mise: polyglot version manager for Ruby, Node, etc. Config: ~/.config/mise/config.toml
+eval "$(mise activate zsh)"
 
 # make git english
 export LC_ALL=en_US.UTF-8

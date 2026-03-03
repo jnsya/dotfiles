@@ -17,7 +17,7 @@
 
 # core tools
 brew 'git'
-brew 'rbenv' # Ruby version manager
+brew 'mise'  # Polyglot version manager (Ruby, Node, etc). Replaces rbenv.
 brew 'coreutils'
 brew 'automake'
 brew 'autoconf'

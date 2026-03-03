@@ -82,12 +82,11 @@ Open `nvim` — LazyVim auto-installs all plugins on first launch.
 
 ### 7. Languages
 
-```bash
-# Ruby
-rbenv install <version> && rbenv global <version>
+Use mise for all language versions (Ruby, Node, Python, etc). See [mise section](#mise-language-versions) below.
 
-# Node
-nvm install --lts
+```bash
+mise use --global ruby@latest
+mise use --global node@lts
 ```
 
 ## Tool reference
@@ -107,6 +106,47 @@ eza:      ls          ls with icons
 
 bat:      bat <file>  syntax-highlighted cat
 ```
+
+## mise — language versions
+
+[mise](https://mise.jdx.dev/) is the one tool that manages versions of Ruby, Node, Python, and anything else. Don't use rbenv, nvm, pyenv, or asdf — mise replaces all of them.
+
+### How it works
+
+mise reads a config file in each project directory and automatically activates the right version when you `cd` in. No manual switching needed.
+
+It understands the old version files too, so existing projects just work:
+- `.ruby-version` (rbenv format) ✓
+- `.tool-versions` (asdf format) ✓
+- `.mise.toml` (native format) ✓
+
+### Setting a version for a project
+
+```bash
+cd my-project
+
+mise install        # if the project already has a .ruby-version or .tool-versions file
+                    # this installs whatever version it specifies
+
+mise use ruby@3.4   # if there's no file yet — installs 3.4 and writes a .mise.toml
+```
+
+### Other useful commands
+
+```bash
+mise current              # what versions are active right now?
+mise ls                   # all installed versions
+mise use --global ruby@3.4   # change your global default
+mise use --global node@lts
+```
+
+### Adding a new language
+
+```bash
+mise use --global python@3.12   # installs and sets as global default
+```
+
+That's it. Same pattern for every language.
 
 ## Thanks
 
