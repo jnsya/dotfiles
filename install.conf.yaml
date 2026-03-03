@@ -11,6 +11,7 @@
     ~/Brewfile: Brewfile
     ~/.config/starship.toml: starship.toml
     ~/.config/lazygit/config.yml: lazygit.yml
+    ~/.tmux.conf: tmux.conf
 
 - create:
     - ~/downloads

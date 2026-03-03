@@ -18,6 +18,7 @@ I want my tools (especially my daily tools, like my editor and the command line)
 - `lazygit.yml` — [Lazygit](https://github.com/jesseduffield/lazygit) TUI config
 - `gitconfig` — Git aliases and settings
 - `Brewfile` — All packages and apps
+- `tmux.conf` — tmux config (mouse, true colour, vi copy mode)
 - `gruvbox-dark.itermcolors` — iTerm2 colour preset
 
 ## Adding a new dotfile
@@ -98,7 +99,23 @@ zoxide:   zi          fuzzy-pick from history
 
 lazygit:  lg          open TUI
                       space=stage  enter=hunk-stage  c=commit  r=rebase  ?=help
+
+tmux:     dev         open dev layout (nvim left | claude right, terminal bottom)
+          dev myapp   same but with a named session (re-running re-attaches)
+
+          Ctrl+b [    enter scroll/copy mode (vi keys to move, q to exit)
+          Ctrl+b z    zoom current pane to fullscreen (again to unzoom)
+          Ctrl+b →←↑↓ move between panes
+          Ctrl+b d    detach session (keep it running in background)
+          tmux ls     list running sessions
+          tmux a      re-attach to last session
 ```
+
+### Scrolling in tmux panes
+
+Keyboard: `Ctrl+b [` enters copy mode. Use `Ctrl+u`/`Ctrl+d` to scroll half-page, or arrow keys. `q` to exit.
+
+Mouse: scroll wheel works, but TUI apps (like Claude Code) capture mouse events. Hold **`Shift`** while scrolling to bypass the app and let tmux scroll instead.
 
 ## mise — language versions
 

@@ -142,6 +142,45 @@ export LANG=en_US.UTF-8
 
 ##########################################
 #
+#           TMUX DEV LAYOUT
+#
+##########################################
+# Opens a tmux session with nvim left, claude right, terminal bottom.
+# Usage: dev          → session named after current directory
+#        dev myapp    → session named "myapp"
+dev() {
+  local session="${1:-$(basename "$PWD" | tr '.' '_' | tr ' ' '_')}"
+
+  if tmux has-session -t "=$session" 2>/dev/null; then
+    tmux attach-session -t "=$session"
+    return
+  fi
+
+  tmux new-session -d -s "$session"
+
+  # Capture the initial pane id so we can target panes by id (not fragile index)
+  local main_pane
+  main_pane=$(tmux display-message -t "$session" -p "#{pane_id}")
+
+  # Split off a full-width bottom terminal (4% height)
+  local bottom_pane
+  bottom_pane=$(tmux split-window -v -p 4 -t "$main_pane" -P -F "#{pane_id}")
+
+  # Split the top pane: nvim left, claude right
+  local right_pane
+  right_pane=$(tmux split-window -h -p 50 -t "$main_pane" -P -F "#{pane_id}")
+
+  tmux send-keys -t "$main_pane" "nvim ." C-m
+  tmux send-keys -t "$right_pane" "claude" C-m
+
+  # Start focused on the bottom terminal
+  tmux select-pane -t "$bottom_pane"
+
+  tmux attach-session -t "=$session"
+}
+
+##########################################
+#
 #           STARSHIP PROMPT
 #
 ##########################################
