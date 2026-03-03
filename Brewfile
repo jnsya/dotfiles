@@ -36,11 +36,15 @@ brew 'bat' # Cat, but better. File viewer
 brew 'diff-so-fancy' # Good-lookin' diffs
 brew 'htop' # Top but colourfuller. Interactive process viewer.
 brew 'tldr' # Terser man pages.
-brew 'z' 	# Like `cd`, but way better. Teleport between disparate directories.
-brew 'tree'
+brew 'zoxide' # Smarter cd: learns your most-used dirs. Use `z` to jump, `zi` to fuzzy-pick.
+brew 'eza'    # Modern ls: colours, icons, git status column (replaces ls + tree)
+# brew 'z'   # Replaced by zoxide
+# brew 'tree' # Replaced by eza --tree
 brew 'ripgrep' # Superfast grep. Also used by fzf.
 brew 'fzf' # General-purpose fuzzyfinder. Used in command-line and Vim.
 brew 'glow' # Beautiful CLI markdown renderer: .md files look good on the command line!
+brew 'starship'  # Cross-shell prompt: git status, language versions, exit codes
+brew 'lazygit'   # Terminal UI for git: stage hunks, interactive rebase, branch management
 
 # editors & terminals
 brew 'neovim'
@@ -82,5 +86,5 @@ cask 'bluesnooze' # Sleeping mac = bluetooth off
 # cask 'dbeaver-community' # SQL database client
 
 tap 'homebrew/cask-fonts'
-cask 'font-fira-code'
+cask 'font-fira-code-nerd-font' # Fira Code + Nerd Font icons (replaces font-fira-code)
 cask 'font-fira-sans'

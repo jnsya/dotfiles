@@ -7,7 +7,7 @@
 ##########################################
 # Note: Plugins and Theme need to be loaded BEFORE sourcing the oh-my-zsh config file, or stuff breaks.
 # Theme
-ZSH_THEME="robbyrussell"
+ZSH_THEME="" # Disabled in favour of Starship (see bottom of file)
 # Plugins
 # Note: new plugins should be installed at `~/.oh-my-zsh/custom/plugins`, then added to this list.
 plugins=(
@@ -30,6 +30,7 @@ export EDITOR="$VISUAL"
 #		  GIT
 #
 ##########################################
+alias lg='lazygit' # open lazygit TUI
 # I use these aliases daily
 alias gb='fzf-git-branch' # fuzzy search git branch (see fzf section)
 alias gco='fzf-git-checkout ' # fuzzy search branch then checkout (see fzf section)
@@ -69,8 +70,11 @@ alias rbc='bundle exec rubocop -a'
 
 if type rg &> /dev/null; then
   export FZF_DEFAULT_COMMAND='rg --files'
-  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+  export FZF_DEFAULT_OPTS='--height 50% --border=rounded --color=bg+:#3c3836,bg:#282828,spinner:#fb4934,hl:#928374,fg:#ebdbb2,header:#928374,info:#8ec07c,pointer:#fb4934,marker:#fb4934,fg+:#ebdbb2,prompt:#fabd2f,hl+:#fb4934'
 fi
+
+# bat (cat replacement) - use gruvbox dark theme
+export BAT_THEME="gruvbox-dark"
 
 # GIT FUNCTIONS
 
@@ -162,8 +166,13 @@ kubessh () {
 #
 ##########################################
 
-# Config for the z executable. This line is suggested by `brew info z`.
-. `brew --prefix`/etc/profile.d/z.sh
+# zoxide: smarter cd (replaces z). `z foo` jumps to best match, `zi` opens fuzzy picker.
+eval "$(zoxide init zsh)"
+
+# eza: modern ls replacement
+alias ls='eza --icons'                          # default ls with icons
+alias ll='eza -la --icons --git'                # long list with git status
+alias lt='eza --tree --icons --git-ignore'      # tree view (respects .gitignore)
 
 # One executable I needed was installed in sbin, so I added it to PATH
 export PATH="/usr/local/sbin:$PATH"
@@ -272,4 +281,15 @@ export NVM_DIR="$HOME/.nvm"
 # make git english
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+##########################################
+#
+#           STARSHIP PROMPT
+#
+##########################################
+# zsh-vi-mode overrides the prompt, so we must init starship inside its
+# post-init hook to ensure it wins. Config: ~/.config/starship.toml
+function zvm_after_init() {
+  eval "$(starship init zsh)"
+}
 

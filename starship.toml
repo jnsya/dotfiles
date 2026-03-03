@@ -1,0 +1,66 @@
+# Starship prompt configuration
+# https://starship.rs/config/
+# Gruvbox dark theme
+
+# Controls what appears and in what order on the prompt line
+format = """
+$directory\
+$git_branch\
+$git_status\
+$ruby\
+$nodejs\
+$cmd_duration\
+$line_break\
+$character"""
+
+scan_timeout = 10
+command_timeout = 500
+
+[character]
+success_symbol = "[❯](bold #b8bb26)"  # gruvbox bright green
+error_symbol = "[❯](bold #fb4934)"    # gruvbox bright red
+
+[directory]
+style = "bold #83a598"   # gruvbox bright blue
+truncation_length = 3
+truncate_to_repo = true  # when inside a git repo, truncate relative to its root
+
+[git_branch]
+format = "on [$symbol$branch](bold #fabd2f) "  # gruvbox bright yellow
+symbol = " "  # requires Nerd Font
+
+[git_status]
+format = '([\[$all_status$ahead_behind\]](bold #fe8019) )'  # gruvbox bright orange
+conflicted = "⚡"
+ahead      = "⇡${count}"
+behind     = "⇣${count}"
+diverged   = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked  = "?"
+stashed    = "≡"
+modified   = "!"
+staged     = "+"
+renamed    = "»"
+deleted    = "✘"
+
+[ruby]
+format = "via [$symbol($version)]($style) "
+symbol = " "             # requires Nerd Font
+style  = "bold #fb4934"  # gruvbox bright red
+# Only shown when a Gemfile or .ruby-version is present (default behaviour)
+
+[nodejs]
+format = "via [$symbol($version)]($style) "
+symbol = " "             # requires Nerd Font
+style  = "bold #b8bb26"  # gruvbox bright green
+# Only shown in Node projects (package.json etc) - default behaviour
+
+[cmd_duration]
+min_time = 2_000                      # show after commands that take >2s
+format   = "took [$duration](#d3869b) "  # gruvbox bright purple
+
+# Modules we don't need cluttering the prompt
+[username]
+disabled = true
+
+[hostname]
+disabled = true

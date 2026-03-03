@@ -5,15 +5,18 @@
 - clean: ['~']
 
 - link:
-    ~/.config/nvim/init.vim: init.vim
+    ~/.config/nvim: nvim
     ~/.zshrc: zshrc
     ~/.gitconfig: gitconfig
     ~/.doom.d:
     ~/Brewfile: Brewfile
+    ~/.config/starship.toml: starship.toml
+    ~/.config/lazygit/config.yml: lazygit.yml
 
 - create:
     - ~/downloads
     - ~/.vim/undo-history
+    - ~/.config/lazygit
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
