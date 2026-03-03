@@ -94,17 +94,10 @@ mise use --global node@lts
 Quick cheatsheet for tools I always forget:
 
 ```
-zoxide:   z <name>    jump to best match
-          zi          fuzzy-pick from history
+zoxide:   zi          fuzzy-pick from history
 
 lazygit:  lg          open TUI
                       space=stage  enter=hunk-stage  c=commit  r=rebase  ?=help
-
-eza:      ls          ls with icons
-          ll          long list with git status
-          lt          tree view
-
-bat:      bat <file>  syntax-highlighted cat
 ```
 
 ## mise — language versions
