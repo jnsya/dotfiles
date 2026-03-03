@@ -133,9 +133,6 @@ alias ls='eza --icons'                          # default ls with icons
 alias ll='eza -la --icons --git'                # long list with git status
 alias lt='eza --tree --icons --git-ignore'      # tree view (respects .gitignore)
 
-# One executable I needed was installed in sbin, so I added it to PATH
-export PATH="/usr/local/sbin:$PATH"
-
 # mise: polyglot version manager for Ruby, Node, etc. Config: ~/.config/mise/config.toml
 eval "$(mise activate zsh)"
 

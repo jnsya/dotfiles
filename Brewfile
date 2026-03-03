@@ -9,7 +9,6 @@
 
 # databases
 # brew 'redis'
-# brew 'imagemagick'
 # brew 'yarn'
 # brew 'postgresql'
 # brew 'pgcli' # Nicer postgres CLI
@@ -42,27 +41,30 @@ brew 'ripgrep' # Superfast grep. Also used by fzf.
 brew 'fzf' # General-purpose fuzzyfinder. Used in command-line and Vim.
 brew 'fd'  # Fast, user-friendly find alternative
 brew 'glow' # Beautiful CLI markdown renderer: .md files look good on the command line!
+brew 'ffmpeg'    # Media processing (audio/video conversion, thumbnails, etc)
+brew 'yt-dlp'   # Download video/audio from YouTube and 500+ sites
+brew 'imagemagick' # Image conversion and manipulation
 brew 'starship'  # Cross-shell prompt: git status, language versions, exit codes
 brew 'lazygit'   # Terminal UI for git: stage hunks, interactive rebase, branch management
 brew 'gh'        # GitHub CLI
 
 # editors & terminals
 brew 'neovim'
+brew 'tmux'  # Terminal multiplexer: persistent sessions, split panes
 brew 'zsh'
 brew 'bash-completion'
 brew 'tree-sitter' # Parses computer languages (used for better syntax highlighting etc by neovim)
 
 # kubernetes & docker
-cask 'docker'
-brew 'docker-compose'
+cask 'docker-desktop'
 # brew 'kubectx'
 # brew 'kubernetes-cli'
 
 # casks (graphical applications)
-tap 'homebrew/cask'
 cask 'visual-studio-code'
 cask 'cursor'
 cask 'claude'
+cask 'claude-code'
 cask 'iterm2'
 cask 'rectangle' # Window tiling manager (replaced Spectacle). Set to Cmd-opt-left/right/up/down to resize windows.
 cask 'dash'
@@ -82,6 +84,5 @@ cask 'bluesnooze' # Sleeping mac = bluetooth off
 # cask 'postman' # GUI for HTTP requests
 # cask 'dbeaver-community' # SQL database client
 
-tap 'homebrew/cask-fonts'
 cask 'font-fira-code-nerd-font' # Fira Code + Nerd Font icons (replaces font-fira-code)
 cask 'font-fira-sans'
