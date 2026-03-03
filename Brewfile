@@ -38,19 +38,19 @@ brew 'htop' # Top but colourfuller. Interactive process viewer.
 brew 'tldr' # Terser man pages.
 brew 'zoxide' # Smarter cd: learns your most-used dirs. Use `z` to jump, `zi` to fuzzy-pick.
 brew 'eza'    # Modern ls: colours, icons, git status column (replaces ls + tree)
-# brew 'z'   # Replaced by zoxide
-# brew 'tree' # Replaced by eza --tree
 brew 'ripgrep' # Superfast grep. Also used by fzf.
 brew 'fzf' # General-purpose fuzzyfinder. Used in command-line and Vim.
+brew 'fd'  # Fast, user-friendly find alternative
 brew 'glow' # Beautiful CLI markdown renderer: .md files look good on the command line!
 brew 'starship'  # Cross-shell prompt: git status, language versions, exit codes
 brew 'lazygit'   # Terminal UI for git: stage hunks, interactive rebase, branch management
+brew 'gh'        # GitHub CLI
 
 # editors & terminals
 brew 'neovim'
 brew 'zsh'
 brew 'bash-completion'
-brew 'treesitter' # Parses computer languages (used for better syntax highlighting etc by neovim)
+brew 'tree-sitter' # Parses computer languages (used for better syntax highlighting etc by neovim)
 
 # kubernetes & docker
 cask 'docker'
@@ -58,18 +58,13 @@ brew 'docker-compose'
 # brew 'kubectx'
 # brew 'kubernetes-cli'
 
-# doom emacs and dependencies
-# tap 'd12frosted/emacs-plus'
-# brew 'emacs-plus'
-brew 'fd' # Fast, user-friendly find alternative
-
 # casks (graphical applications)
 tap 'homebrew/cask'
 cask 'visual-studio-code'
 cask 'cursor'
 cask 'claude'
 cask 'iterm2'
-cask 'rectangle' # Window tiling manager (replaced Spectacle)
+cask 'rectangle' # Window tiling manager (replaced Spectacle). Set to Cmd-opt-left/right/up/down to resize windows.
 cask 'dash'
 cask 'spotify'
 cask 'obsidian' # Note-taking in markdown
@@ -77,9 +72,11 @@ cask 'obsidian' # Note-taking in markdown
 cask 'zoom'
 cask 'lastpass'
 cask 'telegram'
+cask 'discord'
+cask 'whatsapp'
+cask 'selfcontrol' # Properly block addicting sites and apps
 # cask 'anki' # Flashcards for remembering stuff
 # cask 'notion'
-# cask 'nordvpn' # VPN
 cask 'meetingbar' # Displays the day's upcoming meetings in the Mac menubar
 cask 'bluesnooze' # Sleeping mac = bluetooth off
 # cask 'postman' # GUI for HTTP requests

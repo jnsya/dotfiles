@@ -13,7 +13,6 @@ ZSH_THEME="" # Disabled in favour of Starship (see bottom of file)
 plugins=(
 zsh-syntax-highlighting
 fzf-tab # Add functions which use fzf to fuzzy search. eg: fzf-kill to select a process to kill.
-zsh-vi-mode # Better, more vimlike vim mode
 )
 # Path to oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -122,46 +121,6 @@ fzf-git-checkout() {
 
 ##########################################
 #
-#           	DOOM EMACS
-#
-##########################################
-export PATH="/Applications/MacPorts/Emacs.app/Contents/MacOS:$PATH"
-export PATH=~/.emacs.d/bin:$PATH
-
-
-##########################################
-#
-#           	LATANA
-#
-##########################################
-# Switches to the correct context using 'kubectl ctx [staging|production]
-# Runs kubectl get pods using the currect directory to get the namespace
-# Usage: `kubessh <ENV> <SUBENV>`
-#
-#   Example: 
-#     if you're inside LatanaMetrics dir and run
-#       $ kubessh staging web
-#     it will be equivilent to
-#       $ kubectl -n latanametrics-staging exec -it <SOME-POD> bash
-kubessh () {
-  environment=$1
-  subenv=$2
-  working_dir=${PWD##*/}
-  project=$(echo "$working_dir" | tr '[:upper:]' '[:lower:]' )
-  namespace="$project-$environment"
-
-  context=$(kubectx | grep "$environment")
-  kubectx $context
-
-  output=$(kubectl -n "$namespace" get pods | grep "$subenv" | head -n 1)
-  podname=${output%% *}; remainder="${remainder#* }"
-
-  echo "ssh-ing you into $podname. . ."
-
-  kubectl -n $namespace exec -it $podname bash
-}
-##########################################
-#
 #       CONFIGURING EXECUTABLES
 #
 ##########################################
@@ -182,98 +141,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
-##########################################
-#
-#           BOILERPLATE
-#
-##########################################
-
-# The following commented lines all came automatically with the original zshrc.
-# They might contain useful stuff so I won't delete them.
-
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS=true
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export PATH="/usr/local/opt/node@16/bin:$PATH"
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -287,9 +154,5 @@ export LANG=en_US.UTF-8
 #           STARSHIP PROMPT
 #
 ##########################################
-# zsh-vi-mode overrides the prompt, so we must init starship inside its
-# post-init hook to ensure it wins. Config: ~/.config/starship.toml
-function zvm_after_init() {
-  eval "$(starship init zsh)"
-}
-
+# Config: ~/.config/starship.toml
+eval "$(starship init zsh)"

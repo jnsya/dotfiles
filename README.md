@@ -6,60 +6,108 @@ It's useful for me to have my dotfiles under source control, so that they are: b
 
 ## Philosophy
 
-For a long time, my Dotfiles were messy terra incognita: a hodgepodge of uncommented commands and settings that I'd stolen from blogs. This meant that my tools felt scary and triggered some emotional aversion. I didn't feel in control of them.
-
-For Vim in particular, I made the mistake of adding too many plugins and too many commands that I only half-understood.
-
-In general, I want my tools (especially my daily tools, like my editor - Neovim - and the command line) to bring me joy :grin:.
-
-So in 2022, I made the following resolutions about my Dotfiles:
+I want my tools (especially my daily tools, like my editor and the command line) to bring me joy. So:
 - Don't add a line without understanding what it does and why I need it
 - Add a descriptive comment to every line in every dotfile
-	- This ensures both that I'll remember in the future, but also that I *understand it right now*
 
-## Contents (in order of importance)
+## Contents
 
-- `init.vim` configuration for my primary editor, neovim
-- `Brewfile` important packages
-- `zshrc` [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) stuff
-- `gitconfig` the prettier git log alias is the most interesting thing in here
-- `doomd` the first [editor](https://github.com/hlissner/doom-emacs) I ever loved :heart:
+- `nvim/` — [LazyVim](https://www.lazyvim.org/) config
+- `zshrc` — Zsh + [Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh) config
+- `starship.toml` — Shell prompt ([Starship](https://starship.rs/))
+- `lazygit.yml` — [Lazygit](https://github.com/jesseduffield/lazygit) TUI config
+- `gitconfig` — Git aliases and settings
+- `Brewfile` — All packages and apps
+- `gruvbox-dark.itermcolors` — iTerm2 colour preset
 
-## Simplified instructions for adding a new dotfile (because I always forget)
+## Adding a new dotfile
 
-- To add a new file/folder:
-  - Move (don't copy) the file/folder into `~/.dotfiles`
-  - Remove the preceding `.` from its name
-  - Add the name to the `link` block in `install.conf.yaml`
-  - Run `./install`
+- Move (don't copy) the file/folder into `~/dotfiles`
+- Remove the preceding `.` from its name
+- Add the name to the `link` block in `install.conf.yaml`
+- Run `./install`
 
-## Brand new Mac fresh install steps
+## Fresh Mac install
 
-TODO: Turn this into an automatic install script.
+For a fully automated install, run `./setup.sh` after cloning. The steps below explain what it does.
 
-Basics:
-- Sane defaults for Mac system preferences: https://sourabhbajaj.com/mac-setup/SystemPreferences/
-- `xcode-select --install` install xcode
-- `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"` install homebrew
-- [Generate SSH keys](https://docs.github.com/en/github/authenticating-to-github/checking-for-existing-ssh-keys)
+### 1. Prerequisites
 
-These Dotfiles:
-- `git clone git@github.com:jnsya/dotfiles.git` clone this repo
-- `cd ~/dotfiles && ./install` add these dotfiles
-- `brew bundle` installs every package and cask from the Brewfile
-- `sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"` install oh-my-zsh
-- `rm ~/.zshrc` then `./install` again to ensure that this repo's version of `zshrc` has not been overwritten by the oh-my-zsh default
-- install syntax highlighting plugin: `git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting`
-- `source ~/.zshrc`
-- `(brew --prefix)/opt/fzf/install` enable fuzzy completion with fzf
-
-Install Doom
+```bash
+xcode-select --install
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 ```
-git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
-~/.emacs.d/bin/doom install
-export PATH=$PATH:~/.emacs.d/bin
+
+[Generate SSH keys](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) and add to GitHub.
+
+### 2. Clone and symlink dotfiles
+
+```bash
+git clone git@github.com:jnsya/dotfiles.git ~/dotfiles
+cd ~/dotfiles && ./install
+```
+
+### 3. Install packages
+
+```bash
+brew bundle
+```
+
+### 4. Oh My Zsh + plugins
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# If oh-my-zsh overwrote ~/.zshrc, restore the symlink:
+rm ~/.zshrc && cd ~/dotfiles && ./install
+
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+git clone https://github.com/Aloxaf/fzf-tab \
+  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/fzf-tab
+
+$(brew --prefix)/opt/fzf/install
+
+source ~/.zshrc
+```
+
+### 5. iTerm2 (manual — can't be scripted)
+
+- **Font:** Preferences → Profiles → Text → set font to `FiraCode Nerd Font Mono`
+- **Colours:** Preferences → Profiles → Colors → Color Presets → Import → select `~/dotfiles/gruvbox-dark.itermcolors`, then choose `gruvbox-dark`
+
+### 6. Neovim
+
+Open `nvim` — LazyVim auto-installs all plugins on first launch.
+
+### 7. Languages
+
+```bash
+# Ruby
+rbenv install <version> && rbenv global <version>
+
+# Node
+nvm install --lts
+```
+
+## Tool reference
+
+Quick cheatsheet for tools I always forget:
+
+```
+zoxide:   z <name>    jump to best match
+          zi          fuzzy-pick from history
+
+lazygit:  lg          open TUI
+                      space=stage  enter=hunk-stage  c=commit  r=rebase  ?=help
+
+eza:      ls          ls with icons
+          ll          long list with git status
+          lt          tree view
+
+bat:      bat <file>  syntax-highlighted cat
 ```
 
 ## Thanks
 
-This is a fork of [Dotbot](https://github.com/anishathalye/dotbot).
+This repo is managed with [Dotbot](https://github.com/anishathalye/dotbot).
