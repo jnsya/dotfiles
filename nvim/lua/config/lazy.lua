@@ -27,8 +27,8 @@ require("lazy").setup({
     { import = "plugins" },
   },
   defaults = { lazy = false, version = false },
-  -- Try gruvbox first, fall back to built-in habamax during initial install
-  install = { colorscheme = { "gruvbox", "habamax" } },
+  -- Try catppuccin first, fall back to built-in habamax during initial install
+  install = { colorscheme = { "catppuccin", "habamax" } },
   -- Check for plugin updates silently in the background
   checker = { enabled = true, notify = false },
   performance = {
